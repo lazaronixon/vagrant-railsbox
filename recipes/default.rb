@@ -20,7 +20,8 @@ include_recipe 'zlib'
 #include_recipe 'mysql::client'
 include_recipe 'postgresql::server'
 include_recipe 'postgresql::client'
-include_recipe "redisio"
+include_recipe "redisio::install"
+include_recipe "redisio::enable"
 #include_recipe 'mongodb'
 include_recipe "nodejs::npm"
 #include_recipe 'user::data_bag'
