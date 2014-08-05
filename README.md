@@ -12,7 +12,7 @@ Configures a development environment for Ruby on Rails development. It will have
 Download chef-dk
 http://downloads.getchef.com/chef-dk/
 
-Set $PATH variable adding it to .bach_profile
+Set $PATH variable adding it to end of .bach_profile
 export PATH="/opt/chefdk/bin:$PATH"
 
 #Vagrant chef
