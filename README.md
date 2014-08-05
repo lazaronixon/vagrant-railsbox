@@ -13,10 +13,9 @@ Download chef-dk
 http://downloads.getchef.com/chef-dk/
 
 Set $PATH variable adding it to .bach_profile
-#Vagrant chef
 export PATH="/opt/chefdk/bin:$PATH"
 
-
+#Vagrant chef
 
 ```
 gem install berkshelf
