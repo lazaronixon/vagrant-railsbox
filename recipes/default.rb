@@ -12,8 +12,8 @@ include_recipe 'htop'
 include_recipe 'git'
 include_recipe 'curl'
 include_recipe 'zlib'
-#include_recipe "imagemagick"
-#include_recipe "imagemagick::devel"
+include_recipe "imagemagick"
+include_recipe "imagemagick::devel"
 #include_recipe 'java'
 #include_recipe 'elasticsearch'
 #include_recipe 'mysql::server'
