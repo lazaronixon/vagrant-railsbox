@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  ENV['VAGRANT_SYNCED_FOLDER'] ||= "~/Sites"
+  ENV['VAGRANT_SYNCED_FOLDER'] ||= "~/RailsProjects"
   config.vm.synced_folder ENV['VAGRANT_SYNCED_FOLDER'], "/vagrant", type: 'nfs'
   #config.vm.synced_folder ".", "/vagrant", type: 'nfs'
 
@@ -80,7 +80,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
-  #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  #Prevent error on bash
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
@@ -111,11 +112,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           postgres: 'postgres',
           vagrant: 'vagrant'
         }
-      },
-      redis: {
-        server: {
-          run_state: 'start'
-        },
       },
       rvm: {
         'vagrant' => {
