@@ -4,6 +4,7 @@ Configures a development environment for Ruby on Rails development. It will have
 
 - RVM (user_installs)
 - PostgreSQL
+  ImageMagick
 - Redis 2
 - Node.js
 
