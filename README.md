@@ -3,15 +3,20 @@
 Configures a development environment for Ruby on Rails development. It will have the following main components:
 
 - RVM (user_installs)
-- Oh-My-Zsh
-- MySQL
 - PostgreSQL
-- MongoDB
-- Elasticsearch
 - Redis 2
 - Node.js
 
 ## Vagrant Installation
+
+Download chef-dk
+http://downloads.getchef.com/chef-dk/
+
+Set $PATH variable adding it to .bach_profile
+#Vagrant chef
+export PATH="/opt/chefdk/bin:$PATH"
+
+
 
 ```
 gem install berkshelf
