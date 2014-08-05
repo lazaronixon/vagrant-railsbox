@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+#Dont forget it
+#chefdk
+#Vagrant chef
+#export PATH="/opt/chefdk/bin:$PATH"
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -17,12 +22,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
   # Every Vagrant virtual environment requires a box to build off of.
-  # If this value is a shorthand to a box in Vagrant Cloud then 
+  # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
   config.vm.box = "chef/ubuntu-14.04"
 
   # The url from where the 'config.vm.box' box will be fetched if it
-  # is not a Vagrant Cloud box and if it doesn't already exist on the 
+  # is not a Vagrant Cloud box and if it doesn't already exist on the
   # user's system.
   # config.vm.box_url = "https://vagrantcloud.com/chef/ubuntu-14.04/version/1/provider/virtualbox.box"
 
@@ -43,6 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   ENV['VAGRANT_SYNCED_FOLDER'] ||= "~/Sites"
   config.vm.synced_folder ENV['VAGRANT_SYNCED_FOLDER'], "/vagrant", type: 'nfs'
+  #config.vm.synced_folder ".", "/vagrant", type: 'nfs'
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -74,22 +80,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
+  #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
+
 
     chef.json = {
       localegen: {
         lang: [ 'en_US.UTF8' ]
       },
-      java: {
-        install_flavor: "openjdk",
-        jdk_version: "7"
-      },
-      mysql: {
-        server_root_password: 'root',
-        server_debian_password: 'root',
-        server_repl_password: 'root',
-      },
+#      java: {
+#        install_flavor: "openjdk",
+#        jdk_version: "7"
+#      },
+#      mysql: {
+#        server_root_password: 'root',
+#        server_debian_password: 'root',
+#        server_repl_password: 'root',
+#      },
       postgresql: {
         pg_hba: [
           {type: 'local', db: 'all', user: 'postgres', addr: nil,            method: 'trust'},
@@ -109,6 +118,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         },
       },
       rvm: {
+        'vagrant' => {
+          'system_chef_solo' => '/opt/chef/bin/chef-solo'
+        },
         user_installs: [
           {
             user: 'vagrant',
@@ -119,12 +131,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       },
       user: {
         users: [ 'vagrant' ],
-      },
-      :'oh-my-zsh' => {
-        enabled: true,
-        theme: "agnoster",
-        plugins: %w{git ruby rvm}
-      }
+      }#,
+#      :'oh-my-zsh' => {
+#        enabled: true,
+#        theme: "agnoster",
+#        plugins: %w{git ruby rvm}
+#      }
     }
 
     chef.run_list = [
