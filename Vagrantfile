@@ -48,6 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   ENV['VAGRANT_SYNCED_FOLDER'] ||= "~/RailsProjects"
   config.vm.synced_folder ENV['VAGRANT_SYNCED_FOLDER'], "/vagrant", type: 'nfs'
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
   #config.vm.synced_folder ".", "/vagrant", type: 'nfs'
 
   # Provider-specific configuration so you can fine-tune various
