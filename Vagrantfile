@@ -85,7 +85,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.provision "shell",
+    inline: "unlink /home/vagrant/projects"  
+  config.vm.provision "shell",
     inline: "ln -s /projects /home/vagrant/projects"
+
 
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
