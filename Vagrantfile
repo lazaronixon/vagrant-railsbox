@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "railsbox-berkshelf"
+  config.vm.hostname = "railsbox"
 
   # Set the version of chef to install using the vagrant-omnibus plugin
   config.omnibus.chef_version = :latest
@@ -47,9 +47,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   ENV['VAGRANT_SYNCED_FOLDER'] ||= "~/RailsProjects"
-  config.vm.synced_folder ENV['VAGRANT_SYNCED_FOLDER'], "/vagrant", type: 'nfs'
+  config.vm.synced_folder ENV['VAGRANT_SYNCED_FOLDER'], "/projects", type: 'nfs'
   config.vm.network "forwarded_port", guest: 3000, host: 3000
-  #config.vm.synced_folder ".", "/vagrant", type: 'nfs'
+  # config.vm.synced_folder ".", "/vagrant", type: 'nfs'
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -83,6 +83,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #Prevent error on bash
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+  config.vm.provision "shell",
+    inline: "ln -s /projects /home/vagrant/projects"
 
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
