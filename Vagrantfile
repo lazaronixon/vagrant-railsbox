@@ -82,10 +82,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
 
   #Prevent error on bash
-  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.provision "shell",
-    inline: "unlink /home/vagrant/projects"  
+    inline: "unlink /home/vagrant/projects"
   config.vm.provision "shell",
     inline: "ln -s /projects /home/vagrant/projects"
 
