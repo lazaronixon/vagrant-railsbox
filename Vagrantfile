@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = "chef/ubuntu-14.04"
+  config.vm.box = "ubuntu/trusty64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # is not a Vagrant Cloud box and if it doesn't already exist on the
@@ -85,9 +85,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.provision "shell",
-    inline: "unlink /home/vagrant/projects"
-  config.vm.provision "shell",
-    inline: "ln -s /projects /home/vagrant/projects"
+    inline: "ln -s /projects /home/vagrant/projects \n exit 0"
 
 
   config.vm.provision :chef_solo do |chef|
