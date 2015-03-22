@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'chef-locale'
+include_recipe 'locale'
 include_recipe 'htop'
 include_recipe 'git'
 include_recipe 'curl'
@@ -28,7 +28,7 @@ include_recipe 'nodejs::npm'
 #include_recipe 'user::data_bag'
 include_recipe 'memcached'
 include_recipe 'rvm::vagrant'
-include_recipe 'rvm::user_install'
+include_recipe 'rvm::system'
 include_recipe 'ntp'
 #include_recipe 'lxmx_oh_my_zsh'
 

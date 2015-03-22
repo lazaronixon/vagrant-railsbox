@@ -6,7 +6,7 @@ description      'Installs/Configures .'
 long_description 'Installs/Configures .'
 version          '0.1.0'
 
-depends 'chef-locale'
+depends 'locale'
 depends 'htop'
 depends 'git'
 depends 'curl'

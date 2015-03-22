@@ -84,18 +84,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #Prevent error on bash
   #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  config.vm.provision "shell",
-    inline: "ln -s /projects /home/vagrant/projects \n exit 0"
-
+  config.vm.provision :shell, path: "bootstrap.sh"
 
   config.vm.provision :chef_solo do |chef|
     chef.custom_config_path = "Vagrantfile.chef"
 
 
     chef.json = {
-      localegen: {
-        lang: [ 'en_US.UTF8' ]
-      },
+#      localegen: {
+#        lang: [ 'en_US.UTF8' ]
+#      },
 #      java: {
 #        install_flavor: "openjdk",
 #        jdk_version: "7"
@@ -119,16 +117,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
       },
       rvm: {
-        'vagrant' => {
-          'system_chef_solo' => '/opt/chef/bin/chef-solo'
-        },
-        user_installs: [
-          {
-            user: 'vagrant',
-            upgrade: "head",
-            default_ruby: '2.1.2',
-          }
-        ]
+        # default_ruby: "2.2.1",
+        upgrade: "head",
+        vagrant: { system_chef_solo: '/opt/chef/bin/chef-solo' }
       },
       user: {
         users: [ 'vagrant' ],
